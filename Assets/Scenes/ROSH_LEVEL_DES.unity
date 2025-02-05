@@ -320,7 +320,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 895f8cd89de7ba549b95d8c4f94cf401,
         type: 3}
       propertyPath: m_Name
-      value: trap
+      value: TRAP_1
       objectReference: {fileID: 0}
     - target: {fileID: 1133168925949710677, guid: 895f8cd89de7ba549b95d8c4f94cf401,
         type: 3}
