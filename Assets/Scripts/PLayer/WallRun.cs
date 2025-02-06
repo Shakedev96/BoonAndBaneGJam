@@ -46,11 +46,10 @@ public class WallRun : MonoBehaviour
 
         RaycastHit hit;
         bool isTouchingWall = Physics.Raycast(transform.position, transform.right, out hit, 1.2f, wallLayer) ||
-                              Physics.Raycast(transform.position, -transform.right, out hit, 1.2f, wallLayer);
+                            Physics.Raycast(transform.position, -transform.right, out hit, 1.2f, wallLayer);
 
         if (isTouchingWall && Input.GetKey(wallRunKey))
         {
-            Debug.Log("Contact with Wall");
             if (!isWallRunning)
             {
                 lastWallNormal = hit.normal;
@@ -58,7 +57,15 @@ public class WallRun : MonoBehaviour
             }
 
             isWallRunning = true;
-            rb.velocity = new Vector3(rb.velocity.x, 0, transform.forward.z * wallRunSpeed);
+
+            // ✅ Move along the wall direction instead of just forward
+            Vector3 wallRunDirection = Vector3.Cross(lastWallNormal, Vector3.up).normalized;
+            if (Vector3.Dot(transform.forward, wallRunDirection) < 0) // Ensures correct direction
+            {
+                wallRunDirection = -wallRunDirection;
+            }
+
+            rb.velocity = wallRunDirection * wallRunSpeed;
 
             wallRunTimer += Time.deltaTime;
             if (wallRunTimer >= maxWallRunTime)
@@ -88,5 +95,5 @@ public class WallRun : MonoBehaviour
     }
 
 }
-/*
+/*\
 */

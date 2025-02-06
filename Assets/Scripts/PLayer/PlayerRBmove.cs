@@ -38,11 +38,11 @@ public class PlayerRBmove : MonoBehaviour
     {
     
 
-        /* float moveX = Input.GetAxis("Horizontal");
-        float moveZ = Input.GetAxis("Vertical"); */
+        float moveX = Input.GetAxis("Horizontal");
+        float moveZ = Input.GetAxis("Vertical"); 
 
-        
-        moveDirection = new Vector3(moveInput.x, 0f, moveInput.y);
+        moveDirection = transform.right * moveX + transform.forward * moveZ;
+        //moveDirection = new Vector3(moveInput.x, 0f, moveInput.y);
 
         float currentSpeed =  runSpeed ;
 
