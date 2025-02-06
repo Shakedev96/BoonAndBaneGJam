@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerJump : MonoBehaviour
 {
@@ -33,6 +34,14 @@ public class PlayerJump : MonoBehaviour
        
     }
 
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+        {
+            Jump();
+        }
+    }
+
     private void FixedUpdate()
     {
         rb.AddForce(Physics.gravity * (gravityScale - 1) * rb.mass);
@@ -45,7 +54,7 @@ public class PlayerJump : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             Jump();
-            isGrounded = false;
+            
         }
 
        
@@ -59,7 +68,7 @@ public class PlayerJump : MonoBehaviour
 
     private void Jump()
     {
-
+        isGrounded = false;
         float jumpForce = Mathf.Sqrt(jumpHeight * -3 * (Physics.gravity.y * gravityScale));
 
         rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);

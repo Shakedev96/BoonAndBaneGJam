@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerRBmove : MonoBehaviour
 {
     [Header("Movement Settings")]
     public float walkSpeed = 5f;
     public float runSpeed = 10f;
+
+    private Vector3 moveDirection;
+    private Vector2 moveInput;
 
     private Rigidbody rb;
  
@@ -17,6 +21,11 @@ public class PlayerRBmove : MonoBehaviour
         rb.freezeRotation = true; // Prevents physics rotation issues
     }
 
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        moveInput = context.ReadValue<Vector2>();
+    }
+
     private void Update()
     {
         HandleMovement();
@@ -24,15 +33,18 @@ public class PlayerRBmove : MonoBehaviour
         
     }
 
+
     private void HandleMovement()
     {
     
 
-        float moveX = Input.GetAxis("Horizontal");
-        float moveZ = Input.GetAxis("Vertical");
+        /* float moveX = Input.GetAxis("Horizontal");
+        float moveZ = Input.GetAxis("Vertical"); */
 
-        Vector3 moveDirection = transform.right * moveX + transform.forward * moveZ;
-        float currentSpeed = Input.GetKey(KeyCode.LeftShift) ? runSpeed : walkSpeed;
+        
+        moveDirection = new Vector3(moveInput.x, 0f, moveInput.y);
+
+        float currentSpeed =  runSpeed ;
 
         
 
