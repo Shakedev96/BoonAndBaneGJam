@@ -19,6 +19,7 @@ public class PlayerJump : MonoBehaviour
     // [SerializeField] private bool jumping;
 
     [SerializeField] private float gravityScale;
+    [SerializeField] private PlayerInput playerInput;
 
     // [SerializeField] private float currentGravityScale;
     // [SerializeField] private float fallingGravityScale;
@@ -26,36 +27,61 @@ public class PlayerJump : MonoBehaviour
     private Rigidbody rb;
     public bool isGrounded;
 
+    void Awake()
+    {
+        PlayerInput playerInput = GetComponent<PlayerInput>();
+
+        if (Gamepad.current != null)
+        {
+            playerInput.SwitchCurrentControlScheme("Gamepad");
+        }
+    }
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
        // Physics.gravity *= gravityMod;
+       playerInput = GetComponent<PlayerInput>();
+
+
+        InputAction jumpAction = playerInput.actions.FindAction("Jump");
+        if (jumpAction != null)
+        {
+            jumpAction.performed += OnJump;
+        }
+        else
+        {
+            Debug.LogError("Jump action not found in Input Action Asset!");
+        }
+
 
        
     }
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if(context.performed)
+        if(context.performed && isGrounded)
         {
+            Debug.Log($"Jump button pressed from: {context.control.device.displayName}");
             Jump();
         }
+        Debug.Log("X is pressed");
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         rb.AddForce(Physics.gravity * (gravityScale - 1) * rb.mass);
     }
 
-    private void Update()
+    void Update()
     {
         CheckGround();
 
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        /* if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             Jump();
             
-        }
+        } */
 
        
     }

@@ -37,7 +37,7 @@ public partial class @PlayerCont: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""PlayerJump"",
+                    ""name"": ""Jump"",
                     ""type"": ""Button"",
                     ""id"": ""628f2bef-3732-4df2-b901-8373b2d577ef"",
                     ""expectedControlType"": ""Button"",
@@ -53,6 +53,15 @@ public partial class @PlayerCont: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Rotation"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""a7f3555b-c9f5-47f9-acad-6f0b1545b886"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -73,7 +82,7 @@ public partial class @PlayerCont: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/leftStick/up"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""GamePad"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -84,7 +93,7 @@ public partial class @PlayerCont: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/leftStick/down"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""GamePad"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -95,7 +104,7 @@ public partial class @PlayerCont: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/leftStick/left"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""GamePad"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -106,30 +115,96 @@ public partial class @PlayerCont: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/leftStick/right"",
                     ""interactions"": """",
                     ""processors"": """",
+                    ""groups"": ""GamePad"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""a2c4b810-7356-4043-9eeb-735743cabae0"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
                     ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""4e805662-ede3-4b4b-b63d-1c1b325d98f3"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""ee657b04-5d3a-4039-aa21-250af8de8042"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""6ec3b408-d7a9-4670-8ed5-f668ff745784"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""77708ab9-a017-4879-8a84-e5b7ffd9e67f"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": """",
-                    ""id"": ""5313c102-4d5f-4d9c-bca0-761cbc1837bf"",
-                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""id"": ""7f961814-8981-4bc0-9145-25c4c3355a43"",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""PlayerJump"",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""e7a869b5-ee2b-4e09-865f-2f370b3aaa4f"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""id"": ""72fbd0d6-d27e-45ad-a923-4adc0ce5d681"",
+                    ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""WallRun"",
+                    ""groups"": ""GamePad"",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c0ebff93-c20f-4b80-a504-40e5919febad"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""GamePad"",
+                    ""action"": ""Rotation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -138,17 +213,35 @@ public partial class @PlayerCont: IInputActionCollection2, IDisposable
     ],
     ""controlSchemes"": [
         {
-            ""name"": ""Controller1"",
-            ""bindingGroup"": ""Controller1"",
-            ""devices"": []
+            ""name"": ""Keyboard"",
+            ""bindingGroup"": ""Keyboard"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""GamePad"",
+            ""bindingGroup"": ""GamePad"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Gamepad>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
         }
     ]
 }");
         // PlayerMove
         m_PlayerMove = asset.FindActionMap("PlayerMove", throwIfNotFound: true);
         m_PlayerMove_Movement = m_PlayerMove.FindAction("Movement", throwIfNotFound: true);
-        m_PlayerMove_PlayerJump = m_PlayerMove.FindAction("PlayerJump", throwIfNotFound: true);
+        m_PlayerMove_Jump = m_PlayerMove.FindAction("Jump", throwIfNotFound: true);
         m_PlayerMove_WallRun = m_PlayerMove.FindAction("WallRun", throwIfNotFound: true);
+        m_PlayerMove_Rotation = m_PlayerMove.FindAction("Rotation", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -211,15 +304,17 @@ public partial class @PlayerCont: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_PlayerMove;
     private List<IPlayerMoveActions> m_PlayerMoveActionsCallbackInterfaces = new List<IPlayerMoveActions>();
     private readonly InputAction m_PlayerMove_Movement;
-    private readonly InputAction m_PlayerMove_PlayerJump;
+    private readonly InputAction m_PlayerMove_Jump;
     private readonly InputAction m_PlayerMove_WallRun;
+    private readonly InputAction m_PlayerMove_Rotation;
     public struct PlayerMoveActions
     {
         private @PlayerCont m_Wrapper;
         public PlayerMoveActions(@PlayerCont wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_PlayerMove_Movement;
-        public InputAction @PlayerJump => m_Wrapper.m_PlayerMove_PlayerJump;
+        public InputAction @Jump => m_Wrapper.m_PlayerMove_Jump;
         public InputAction @WallRun => m_Wrapper.m_PlayerMove_WallRun;
+        public InputAction @Rotation => m_Wrapper.m_PlayerMove_Rotation;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMove; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -232,12 +327,15 @@ public partial class @PlayerCont: IInputActionCollection2, IDisposable
             @Movement.started += instance.OnMovement;
             @Movement.performed += instance.OnMovement;
             @Movement.canceled += instance.OnMovement;
-            @PlayerJump.started += instance.OnPlayerJump;
-            @PlayerJump.performed += instance.OnPlayerJump;
-            @PlayerJump.canceled += instance.OnPlayerJump;
+            @Jump.started += instance.OnJump;
+            @Jump.performed += instance.OnJump;
+            @Jump.canceled += instance.OnJump;
             @WallRun.started += instance.OnWallRun;
             @WallRun.performed += instance.OnWallRun;
             @WallRun.canceled += instance.OnWallRun;
+            @Rotation.started += instance.OnRotation;
+            @Rotation.performed += instance.OnRotation;
+            @Rotation.canceled += instance.OnRotation;
         }
 
         private void UnregisterCallbacks(IPlayerMoveActions instance)
@@ -245,12 +343,15 @@ public partial class @PlayerCont: IInputActionCollection2, IDisposable
             @Movement.started -= instance.OnMovement;
             @Movement.performed -= instance.OnMovement;
             @Movement.canceled -= instance.OnMovement;
-            @PlayerJump.started -= instance.OnPlayerJump;
-            @PlayerJump.performed -= instance.OnPlayerJump;
-            @PlayerJump.canceled -= instance.OnPlayerJump;
+            @Jump.started -= instance.OnJump;
+            @Jump.performed -= instance.OnJump;
+            @Jump.canceled -= instance.OnJump;
             @WallRun.started -= instance.OnWallRun;
             @WallRun.performed -= instance.OnWallRun;
             @WallRun.canceled -= instance.OnWallRun;
+            @Rotation.started -= instance.OnRotation;
+            @Rotation.performed -= instance.OnRotation;
+            @Rotation.canceled -= instance.OnRotation;
         }
 
         public void RemoveCallbacks(IPlayerMoveActions instance)
@@ -268,19 +369,29 @@ public partial class @PlayerCont: IInputActionCollection2, IDisposable
         }
     }
     public PlayerMoveActions @PlayerMove => new PlayerMoveActions(this);
-    private int m_Controller1SchemeIndex = -1;
-    public InputControlScheme Controller1Scheme
+    private int m_KeyboardSchemeIndex = -1;
+    public InputControlScheme KeyboardScheme
     {
         get
         {
-            if (m_Controller1SchemeIndex == -1) m_Controller1SchemeIndex = asset.FindControlSchemeIndex("Controller1");
-            return asset.controlSchemes[m_Controller1SchemeIndex];
+            if (m_KeyboardSchemeIndex == -1) m_KeyboardSchemeIndex = asset.FindControlSchemeIndex("Keyboard");
+            return asset.controlSchemes[m_KeyboardSchemeIndex];
+        }
+    }
+    private int m_GamePadSchemeIndex = -1;
+    public InputControlScheme GamePadScheme
+    {
+        get
+        {
+            if (m_GamePadSchemeIndex == -1) m_GamePadSchemeIndex = asset.FindControlSchemeIndex("GamePad");
+            return asset.controlSchemes[m_GamePadSchemeIndex];
         }
     }
     public interface IPlayerMoveActions
     {
         void OnMovement(InputAction.CallbackContext context);
-        void OnPlayerJump(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
         void OnWallRun(InputAction.CallbackContext context);
+        void OnRotation(InputAction.CallbackContext context);
     }
 }

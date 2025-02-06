@@ -52,14 +52,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _DistortionStrength: 10
+    - _DistortionStrength: 25
     - _Mettalic_Control: 0
-    - _NoisePower: 5
-    - _NoiseScale: 100
+    - _NoisePower: 3
+    - _NoiseScale: 50
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Specular_Control: 0
-    - _TwirlStrength: 10
+    - _TwirlStrength: 15
     m_Colors:
     - _BaseColor: {r: 42.722507, g: 1.2055267, b: 0, a: 0}
     - _PanSpeed: {r: 0.1, g: 0.1, b: 0, a: 0}

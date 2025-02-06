@@ -1,99 +1,101 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class WallRun : MonoBehaviour
 {
-    [Header("Wall Run Settings")]
-    public float wallRunSpeed = 8f;
-    public float wallJumpForce = 10f;
-    public float maxWallRunTime = 2f;
-    public KeyCode wallRunKey = KeyCode.E; // Press 'E' to wall run
-    public LayerMask wallLayer;
+    [Header("Movement")]
+    [SerializeField] private Transform orientation;
+
+
+    [Header("Detection")]
+    [SerializeField] private float wallDistance = 0.5f;
+    [SerializeField] private float minimumJumpHeight = 1.5f;
+
+    [Header ("Wall Running Settings")]
+    [SerializeField] private float wallRunGravity;
+    [SerializeField] private float wallRunJumpForce;
+
+    private bool wallLeft = false;
+    private bool wallRight = false;
+
+    RaycastHit leftWallHit, rightWallHit;
     
-    
-    private Rigidbody rb;
-    [SerializeField] private PlayerJump grounded;
-    private bool isWallRunning;
-    private float wallRunTimer;
-    private Vector3 lastWallNormal;
-    // Start is called before the first frame update
+
+    private Rigidbody RB;
+
+
     void Start()
     {
-        grounded = GetComponent<PlayerJump>();
-        rb = GetComponent<Rigidbody>();
+        RB = GetComponent<Rigidbody>();    
+    }
+    bool CanWallRun()
+    {
+        return !Physics.Raycast(transform.position, Vector3.down, minimumJumpHeight);
+
     }
 
-    // Update is called once per frame
+    void CheckWall()
+    {
+        wallLeft = Physics.Raycast(transform.position, -orientation.right, out leftWallHit, wallDistance);
+        wallRight = Physics.Raycast(transform.position, orientation.right, out rightWallHit, wallDistance);
+    }
+
     void Update()
     {
-        CheckWallRun();
+        CheckWall();
 
-        if (Input.GetKeyDown(KeyCode.Space) && isWallRunning)
+        if(CanWallRun())
         {
-            WallJump();
-        }
-    }
-
-    private void CheckWallRun()
-    {
-        if (grounded.isGrounded) 
-        {
-            isWallRunning = false;
-            wallRunTimer = 0;
-            return;
-        }
-
-        RaycastHit hit;
-        bool isTouchingWall = Physics.Raycast(transform.position, transform.right, out hit, 1.2f, wallLayer) ||
-                            Physics.Raycast(transform.position, -transform.right, out hit, 1.2f, wallLayer);
-
-        if (isTouchingWall && Input.GetKey(wallRunKey))
-        {
-            if (!isWallRunning)
+            if(wallLeft)
             {
-                lastWallNormal = hit.normal;
-                rb.useGravity = false; // Disable gravity for smooth wall run
+                StartWallRun();
+                Debug.Log("Wall Run On the Left");
             }
-
-            isWallRunning = true;
-
-            // ✅ Move along the wall direction instead of just forward
-            Vector3 wallRunDirection = Vector3.Cross(lastWallNormal, Vector3.up).normalized;
-            if (Vector3.Dot(transform.forward, wallRunDirection) < 0) // Ensures correct direction
+            else if(wallRight)
             {
-                wallRunDirection = -wallRunDirection;
+                StartWallRun();
+                Debug.Log("Wall Run On The Right");
             }
-
-            rb.velocity = wallRunDirection * wallRunSpeed;
-
-            wallRunTimer += Time.deltaTime;
-            if (wallRunTimer >= maxWallRunTime)
+            else
             {
-                isWallRunning = false;
+                StopWallRun();
             }
         }
         else
         {
-            ExitWallRun();
+            StopWallRun();
         }
     }
 
-    private void WallJump()
+    void StartWallRun()
     {
-        rb.velocity = new Vector3(lastWallNormal.x * wallJumpForce, wallJumpForce, lastWallNormal.z * wallJumpForce);
-        ExitWallRun();
-    }
+        RB.useGravity = false;
+        RB.AddForce(Vector3.down * wallRunGravity,ForceMode.Force);
 
-    private void ExitWallRun()
-    {
-        if (isWallRunning)
+        if(Input.GetKeyDown(KeyCode.Space))
         {
-            isWallRunning = false;
-            rb.useGravity = true;
+            if(wallLeft)
+            {                 
+                Vector3 wallRunJumpDirection = transform.up + leftWallHit.normal;   // remove * 100 after testing.
+                RB.velocity = new Vector3(RB.velocity.x, 0 , RB.velocity.z);
+                RB.AddForce(wallRunJumpDirection * wallRunJumpForce * 100, ForceMode.Force);
+            }
+            else if(wallRight)
+            {
+                Vector3 wallRunJumpDirection = transform.up + rightWallHit.normal;
+                RB.velocity = new Vector3(RB.velocity.x, 0 , RB.velocity.z);
+                RB.AddForce(wallRunJumpDirection * wallRunJumpForce * 100, ForceMode.Force);
+            }
         }
     }
+
+    void StopWallRun()
+    {
+        RB.useGravity = true;
+    }
+
+
 
 }
-/*\
-*/
