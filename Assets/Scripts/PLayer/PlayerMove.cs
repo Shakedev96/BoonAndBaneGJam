@@ -15,6 +15,7 @@ public class PlayerMove : MonoBehaviour
 
    Vector3 moveDirection;
 
+     public bool isFinished;
    private Rigidbody RB;
    private PlayerJump playerJump;
 
@@ -62,5 +63,14 @@ public class PlayerMove : MonoBehaviour
         RB.AddForce(moveDirection.normalized * moveSpeed * movementMultiplier, ForceMode.Acceleration);
    }
 
+
+     void OnCollisionEnter(Collision other)
+     {
+          if(other.gameObject.CompareTag("EndLine"))
+          {
+               isFinished = true;
+          }
+     }
+     
 
 }

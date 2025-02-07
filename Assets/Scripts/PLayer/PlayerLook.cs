@@ -8,7 +8,7 @@ public class PlayerLook : MonoBehaviour
     [SerializeField] private float sensX;
     [SerializeField] private float sensY;
 
-    Camera Cam;
+    public Camera Cam;
 
     float mouseX, mouseY;
 
@@ -33,8 +33,8 @@ public class PlayerLook : MonoBehaviour
 
     void myInput()
     {
-        mouseX = Input.GetAxisRaw("MouseX");
-        mouseY = Input.GetAxisRaw("MouseY");
+        mouseX = Input.GetAxisRaw("Mouse X");
+        mouseY = Input.GetAxisRaw("Mouse Y");
 
         yRot += mouseX * sensX * multiplier;
         xRot -= mouseY * sensY * multiplier;
