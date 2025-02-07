@@ -16,12 +16,9 @@ public class PlayerJump : MonoBehaviour
     private PlayerInput playerInput;
 
     [Header("Jump Logic")]
-    public int maxJumps = 1;  // Default jump count
+    public int maxJumps = 1;  
     private int currentJumps = 0;
-
-    [Header("Power-Up Settings")]
-    public int boostedJumpCount = 2;   // Double jump
-    public float powerUpDuration = 5f; // Duration of double jump effect
+    private int baseJumpCount; 
 
     void Awake()
     {
@@ -36,6 +33,7 @@ public class PlayerJump : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        baseJumpCount = maxJumps;
 
         InputAction jumpAction = playerInput.actions.FindAction("Jump");
         if (jumpAction != null)
@@ -52,7 +50,6 @@ public class PlayerJump : MonoBehaviour
     {
         if (context.performed && currentJumps < maxJumps)
         {
-            Debug.Log($"Jump button pressed from: {context.control.device.displayName}");
             Jump();
         }
     }
@@ -72,7 +69,7 @@ public class PlayerJump : MonoBehaviour
         if (Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundLayer))
         {
             isGrounded = true;
-            currentJumps = 0; // Reset jump count when grounded
+            currentJumps = 0; 
         }
         else
         {
@@ -83,28 +80,26 @@ public class PlayerJump : MonoBehaviour
     private void Jump()
     {
         isGrounded = false;
-        currentJumps++; // Increase jump count
+        currentJumps++; 
 
         float jumpForce = Mathf.Sqrt(jumpHeight * -3 * (Physics.gravity.y * gravityScale));
         rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
     }
 
-    // 🚀 **Apply Double Jump Power-Up**
-    public void ApplyDoubleJumpPowerUp()
+    // 🚀 **Apply Double Jump Boon**
+    public void ApplyDoubleJumpBoon(float duration)
     {
-        StartCoroutine(DoubleJumpRoutine());
+        StartCoroutine(DoubleJumpRoutine(duration));
     }
 
-    private IEnumerator DoubleJumpRoutine()
+    private IEnumerator DoubleJumpRoutine(float duration)
     {
-        maxJumps = boostedJumpCount; // Enable double jump
-        yield return new WaitForSeconds(powerUpDuration);
-        maxJumps = 1; // Reset to normal jump
+        maxJumps = 2;
+        yield return new WaitForSeconds(duration);
+        maxJumps = baseJumpCount;
     }
 
 }
 /*
-
-}
 
 */

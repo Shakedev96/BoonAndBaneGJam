@@ -4,45 +4,41 @@ using UnityEngine;
 
 public class SpeedUP : MonoBehaviour
 {
-    public float duration = 5f;  // Boost duration
+    public float speedMultiplier = 1.5f;
+    public float duration = 10f;
 
-    private void OnTriggerEnter(Collider other)
+    private PlayerMove playerMovement;
+    private PowerUpUI boonManager;
+
+    private void Start()
     {
-        if (other.CompareTag("Player"))
-        {
-            PlayerMove player = other.GetComponent<PlayerMove>();
-            if (player != null)
-            {
-                player.ApplySpeedBoost();
-            }
+        playerMovement = GetComponent<PlayerMove>();
+        boonManager = FindAnyObjectByType<PowerUpUI>();
+    }
 
-            // Disable power-up after pickup
-            gameObject.SetActive(false);
-        }
+    public void Activate()
+    {
+        StartCoroutine(SpeedBoost());
+    }
+
+    private IEnumerator SpeedBoost()
+    {
+        boonManager.ActivateBoon(PowerUpUI.BoonType.Speed, duration);
+        playerMovement.moveSpeed *= speedMultiplier;
+
+        yield return new WaitForSeconds(duration);
+
+        playerMovement.moveSpeed /= speedMultiplier;
     }
 }
 /*
 using UnityEngine;
 
-public class SpeedPowerUp : MonoBehaviour
+public class SpeedBoon : MonoBehaviour
 {
-    public float duration = 5f;  // Boost duration
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            PlayerMove player = other.GetComponent<PlayerMove>();
-            if (player != null)
-            {
-                player.ApplySpeedBoost();
-            }
-
-            // Disable power-up after pickup
-            gameObject.SetActive(false);
-        }
-    }
+    
 }
+
 
 
 */

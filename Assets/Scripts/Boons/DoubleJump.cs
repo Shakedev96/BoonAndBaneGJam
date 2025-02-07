@@ -4,15 +4,51 @@ using UnityEngine;
 
 public class DoubleJump : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public float duration = 15f;
+
+    private PlayerJump playerJump;
+    private PowerUpUI boonManager;
+
+    private void Start()
     {
-        
+        playerJump = FindAnyObjectByType<PlayerJump>();  // Find the PlayerJump script
+        boonManager = FindAnyObjectByType<PowerUpUI>(); // Find the UI manager
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Activate()
     {
-        
+        if (playerJump != null)
+        {
+            StartCoroutine(DoubleJumpBoost());
+        }
+        else
+        {
+            Debug.LogError("PlayerJump script not found on the player!");
+        }
+    }
+
+    private IEnumerator DoubleJumpBoost()
+    {
+        // Activate UI boon timer
+        boonManager?.ActivateBoon(PowerUpUI.BoonType.DoubleJump, duration);
+
+        // Apply double jump boon effect
+        playerJump.ApplyDoubleJumpBoon(duration);
+
+        yield return new WaitForSeconds(duration);
+
+        // Reset UI after the boon ends
+        boonManager?.DeactivateBoon(PowerUpUI.BoonType.DoubleJump);
     }
 }
+/*
+using System.Collections;
+using UnityEngine;
+
+public class DoubleJumpBoon : MonoBehaviour
+{
+    
+}
+
+
+*/

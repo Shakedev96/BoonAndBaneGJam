@@ -6,10 +6,13 @@ using UnityEngine.InputSystem;
 public class PlayerMove : MonoBehaviour
 {
    [Header("Movement")]
-    [SerializeField] private float moveSpeed;
+    [SerializeField] public float moveSpeed;
     [SerializeField] public float movementMultiplier = 10f;
     public float rbDrag = 6f;
     public float airDrag = 2f;
+
+    public float baseSpeed;
+    public bool canDash = false;
 
     float horizontalMovement, verticalMovement;
     Vector2 moveInput;
@@ -20,27 +23,47 @@ public class PlayerMove : MonoBehaviour
     private PlayerJump playerJump;
 
     [Header("Speed Boost")]
-    public float speedBoostAmount = 5f;  // Extra speed gained from power-up
-    public float boostDuration = 5f;     // Duration of speed boost
-    private float baseSpeed;             // Stores original speed
+    public float speedBoostAmount = 5f;  
+    public float boostDuration = 5f;     
+
+    [Header("Dash Ability")]
+    public float dashForce = 20f;  
+    public float dashDuration = 0.2f;
 
     void Start()
     {
         RB = GetComponent<Rigidbody>();
         RB.freezeRotation = true;
         playerJump = GetComponent<PlayerJump>();
-        baseSpeed = moveSpeed; // Save original speed
+        baseSpeed = moveSpeed; 
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
     }
+    public void OnDash(InputAction.CallbackContext context)
+    {
+          if(context.performed)
+          {
+               Debug.Log("dash presesed");
+               if(canDash)
+               {
+                    StartCoroutine(DashRoutine());
+               }
+          }
+    }
 
     void Update()
     {
         HandleInput();
         ControlDrag();
+
+        // Check if dash key is pressed and dash boon is active
+        if (canDash && Keyboard.current.shiftKey.wasPressedThisFrame) 
+        {
+            StartCoroutine(DashRoutine());
+        }
     }
 
     void HandleInput()
@@ -73,20 +96,66 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    // 🚀 **Apply Speed Boost**
-    public void ApplySpeedBoost()
+    // 🚀 **Apply Speed Boost Boon**
+    public void ApplySpeedBoost(float duration)
     {
-        StartCoroutine(SpeedBoostRoutine());
+        StartCoroutine(SpeedBoostRoutine(duration));
     }
 
-    private IEnumerator SpeedBoostRoutine()
+    private IEnumerator SpeedBoostRoutine(float duration)
     {
-        moveSpeed += speedBoostAmount;  // Increase speed
-        yield return new WaitForSeconds(boostDuration);  
-        moveSpeed = baseSpeed;  // Reset speed after duration
+        moveSpeed += speedBoostAmount;
+        yield return new WaitForSeconds(duration);
+        moveSpeed = baseSpeed;
     }
+
+    // **Apply Dash Boon**
+    public void ApplyDashBoon(float duration)
+    {
+        StartCoroutine(DashBoonRoutine(duration));
+    }
+
+    private IEnumerator DashBoonRoutine(float duration)
+    {
+        canDash = true;
+        yield return new WaitForSeconds(duration);
+        canDash = false;
+    }
+
+    private IEnumerator DashRoutine()
+    {
+        Vector3 dashDirection = transform.forward;
+        float startTime = Time.time;
+
+        while (Time.time < startTime + dashDuration)
+        {
+            RB.velocity = dashDirection * dashForce;
+            yield return null;
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+{
+    if (other.CompareTag("BlurryVisionBane"))
+    {
+        FindAnyObjectByType<BaneManager>().ApplyBlurryVision(10f);
+    }
+    else if (other.CompareTag("FrictionlessBane"))
+    {
+        FindAnyObjectByType<BaneManager>().ApplyFrictionless(10f);
+    }
+    else if (other.CompareTag("SpeedReductionBane"))
+    {
+        FindAnyObjectByType<BaneManager>().ApplySpeedReduction(10f);
+    }
+}
+
      
 
 }
+
+/*
+*/
+
 
 
