@@ -8,9 +8,9 @@ public class LoseCondition : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == player)
+        if(other.gameObject.CompareTag(player))
         {
-            Destroy(other.gameObject);
+            //Destroy(other.gameObject);
             Debug.Log("GameOver");
         }
     }
