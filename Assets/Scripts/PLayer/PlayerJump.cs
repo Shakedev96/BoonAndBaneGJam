@@ -37,15 +37,15 @@ public class PlayerJump : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
-        InputAction jumpAction = playerInput.actions.FindAction("Jump");
-        if (jumpAction != null)
-        {
-            jumpAction.performed += OnJump;
-        }
-        else
-        {
-            Debug.LogError("Jump action not found in Input Action Asset!");
-        }
+        ////InputAction jumpAction = playerInput.actions.FindAction("Jump");
+        ////if (jumpAction != null)
+        ////{
+        ////    jumpAction.performed += OnJump;
+        ////}
+        ////else
+        ////{
+        ////    Debug.LogError("Jump action not found in Input Action Asset!");
+        ////}
     }
 
     public void OnJump(InputAction.CallbackContext context)

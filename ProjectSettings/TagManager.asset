@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - EndLine
+  - SpeedReductionBane
+  - BlurryVisionBane
+  - FrictionlessBane
   layers:
   - Default
   - TransparentFX

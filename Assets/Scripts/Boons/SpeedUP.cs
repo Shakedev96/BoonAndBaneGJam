@@ -13,7 +13,7 @@ public class SpeedUP : MonoBehaviour
             PlayerMove player = other.GetComponent<PlayerMove>();
             if (player != null)
             {
-                player.ApplySpeedBoost();
+                player.ApplySpeedBoost(duration);
             }
 
             // Disable power-up after pickup
