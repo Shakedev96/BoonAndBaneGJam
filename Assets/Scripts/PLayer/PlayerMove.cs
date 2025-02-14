@@ -11,6 +11,9 @@ public class PlayerMove : MonoBehaviour
     public float rbDrag = 6f;
     public float airDrag = 2f;
 
+    public float wallRunSpeed;
+    [SerializeField] public bool wallrunning;
+
     public float baseSpeed;
     public bool canDash = false;
 
@@ -49,7 +52,7 @@ public class PlayerMove : MonoBehaviour
             Debug.Log("dash presesed");
             if (canDash)
             {
-                StartCoroutine(DashRoutine());
+                //StartCoroutine(DashRoutine());
             }
         }
     }
@@ -58,12 +61,20 @@ public class PlayerMove : MonoBehaviour
     {
         HandleInput();
         ControlDrag();
+        if(wallrunning)
+        {
+            baseSpeed = wallRunSpeed;
+        }
+        else
+        {
+            baseSpeed = moveSpeed;
+        }
 
-        // Check if dash key is pressed and dash boon is active
-        if (canDash && Keyboard.current.shiftKey.wasPressedThisFrame)
+        // Check if dash key is pressed and dash boon is active UNCOMMENT WHEN REQUIRED
+        /* if (canDash && Keyboard.current.shiftKey.wasPressedThisFrame)
         {
             StartCoroutine(DashRoutine());
-        }
+        } */
     }
 
     void HandleInput()
@@ -96,8 +107,10 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
+    
+// need to update the below code
     // 🚀 *Apply Speed Boost Boon*
-    public void ApplySpeedBoost(float duration)
+   /* public void ApplySpeedBoost(float duration)
     {
         StartCoroutine(SpeedBoostRoutine(duration));
     }
@@ -148,7 +161,7 @@ public class PlayerMove : MonoBehaviour
         {
             FindAnyObjectByType<BaneManager>().ApplySpeedReduction(10f);
         }
-    }
+    }*/
 
 
 
