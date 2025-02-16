@@ -24,17 +24,8 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "WallRun",
-                    "type": "PassThrough",
-                    "id": "9cf86336-f20a-41c7-9b4d-052a5a3c4ce0",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Rotation",
-                    "type": "PassThrough",
+                    "type": "Value",
                     "id": "a7f3555b-c9f5-47f9-acad-6f0b1545b886",
                     "expectedControlType": "Vector2",
                     "processors": "",
@@ -167,7 +158,7 @@
                 {
                     "name": "",
                     "id": "72fbd0d6-d27e-45ad-a923-4adc0ce5d681",
-                    "path": "<Gamepad>/buttonWest",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "GamePad",
@@ -177,19 +168,19 @@
                 },
                 {
                     "name": "",
-                    "id": "c0ebff93-c20f-4b80-a504-40e5919febad",
-                    "path": "<Gamepad>/rightStick",
+                    "id": "1ac9bafe-411c-48ee-b5c9-c8164d64bd6d",
+                    "path": "<Mouse>/delta",
                     "interactions": "",
                     "processors": "",
-                    "groups": "GamePad",
+                    "groups": "",
                     "action": "Rotation",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "d8bfc969-0f79-4647-a7d1-fa0a1732ee98",
-                    "path": "<Mouse>/position",
+                    "id": "1777d637-f9e2-493c-b4a3-8e59599f99fc",
+                    "path": "<Gamepad>/rightStick",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

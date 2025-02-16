@@ -50,10 +50,11 @@ public class PlayerJump : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.performed && currentJumps < maxJumps)
+        if (context.performed && isGrounded) //&& currentJumps < maxJumps)
         {
             Debug.Log($"Jump button pressed from: {context.control.device.displayName}");
             Jump();
+            
         }
     }
 
@@ -83,24 +84,12 @@ public class PlayerJump : MonoBehaviour
     private void Jump()
     {
         isGrounded = false;
-        currentJumps++; // Increase jump count
 
         float jumpForce = Mathf.Sqrt(jumpHeight * -3 * (Physics.gravity.y * gravityScale));
         rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
     }
 
-    // 🚀 **Apply Double Jump Power-Up**
-    public void ApplyDoubleJumpPowerUp()
-    {
-        StartCoroutine(DoubleJumpRoutine());
-    }
-
-    private IEnumerator DoubleJumpRoutine()
-    {
-        maxJumps = boostedJumpCount; // Enable double jump
-        yield return new WaitForSeconds(powerUpDuration);
-        maxJumps = 1; // Reset to normal jump
-    }
+    
 
 }
 /*

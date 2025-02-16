@@ -46,17 +46,8 @@ public partial class @PlayerCont: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""WallRun"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""9cf86336-f20a-41c7-9b4d-052a5a3c4ce0"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Rotation"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Value"",
                     ""id"": ""a7f3555b-c9f5-47f9-acad-6f0b1545b886"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
@@ -189,7 +180,7 @@ public partial class @PlayerCont: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""72fbd0d6-d27e-45ad-a923-4adc0ce5d681"",
-                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""GamePad"",
@@ -199,19 +190,19 @@ public partial class @PlayerCont: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""c0ebff93-c20f-4b80-a504-40e5919febad"",
-                    ""path"": ""<Gamepad>/rightStick"",
+                    ""id"": ""1ac9bafe-411c-48ee-b5c9-c8164d64bd6d"",
+                    ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""GamePad"",
+                    ""groups"": """",
                     ""action"": ""Rotation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""d8bfc969-0f79-4647-a7d1-fa0a1732ee98"",
-                    ""path"": ""<Mouse>/position"",
+                    ""id"": ""1777d637-f9e2-493c-b4a3-8e59599f99fc"",
+                    ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -251,7 +242,6 @@ public partial class @PlayerCont: IInputActionCollection2, IDisposable
         m_PlayerMove = asset.FindActionMap("PlayerMove", throwIfNotFound: true);
         m_PlayerMove_Movement = m_PlayerMove.FindAction("Movement", throwIfNotFound: true);
         m_PlayerMove_Jump = m_PlayerMove.FindAction("Jump", throwIfNotFound: true);
-        m_PlayerMove_WallRun = m_PlayerMove.FindAction("WallRun", throwIfNotFound: true);
         m_PlayerMove_Rotation = m_PlayerMove.FindAction("Rotation", throwIfNotFound: true);
     }
 
@@ -316,7 +306,6 @@ public partial class @PlayerCont: IInputActionCollection2, IDisposable
     private List<IPlayerMoveActions> m_PlayerMoveActionsCallbackInterfaces = new List<IPlayerMoveActions>();
     private readonly InputAction m_PlayerMove_Movement;
     private readonly InputAction m_PlayerMove_Jump;
-    private readonly InputAction m_PlayerMove_WallRun;
     private readonly InputAction m_PlayerMove_Rotation;
     public struct PlayerMoveActions
     {
@@ -324,7 +313,6 @@ public partial class @PlayerCont: IInputActionCollection2, IDisposable
         public PlayerMoveActions(@PlayerCont wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_PlayerMove_Movement;
         public InputAction @Jump => m_Wrapper.m_PlayerMove_Jump;
-        public InputAction @WallRun => m_Wrapper.m_PlayerMove_WallRun;
         public InputAction @Rotation => m_Wrapper.m_PlayerMove_Rotation;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMove; }
         public void Enable() { Get().Enable(); }
@@ -341,9 +329,6 @@ public partial class @PlayerCont: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
-            @WallRun.started += instance.OnWallRun;
-            @WallRun.performed += instance.OnWallRun;
-            @WallRun.canceled += instance.OnWallRun;
             @Rotation.started += instance.OnRotation;
             @Rotation.performed += instance.OnRotation;
             @Rotation.canceled += instance.OnRotation;
@@ -357,9 +342,6 @@ public partial class @PlayerCont: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
-            @WallRun.started -= instance.OnWallRun;
-            @WallRun.performed -= instance.OnWallRun;
-            @WallRun.canceled -= instance.OnWallRun;
             @Rotation.started -= instance.OnRotation;
             @Rotation.performed -= instance.OnRotation;
             @Rotation.canceled -= instance.OnRotation;
@@ -402,7 +384,6 @@ public partial class @PlayerCont: IInputActionCollection2, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
-        void OnWallRun(InputAction.CallbackContext context);
         void OnRotation(InputAction.CallbackContext context);
     }
 }

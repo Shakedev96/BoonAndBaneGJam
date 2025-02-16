@@ -45,17 +45,19 @@ public class PlayerMove : MonoBehaviour
     {
         moveInput = context.ReadValue<Vector2>();
     }
-    public void OnDash(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            Debug.Log("dash presesed");
-            if (canDash)
-            {
-                //StartCoroutine(DashRoutine());
-            }
-        }
-    }
+
+    
+    // public void OnDash(InputAction.CallbackContext context)
+    // {
+    //     if (context.performed)
+    //     {
+    //         Debug.Log("dash presesed");
+    //         if (canDash)
+    //         {
+    //             //StartCoroutine(DashRoutine());
+    //         }
+    //     }
+    // }
 
     void Update()
     {
@@ -70,11 +72,7 @@ public class PlayerMove : MonoBehaviour
             baseSpeed = moveSpeed;
         }
 
-        // Check if dash key is pressed and dash boon is active UNCOMMENT WHEN REQUIRED
-        /* if (canDash && Keyboard.current.shiftKey.wasPressedThisFrame)
-        {
-            StartCoroutine(DashRoutine());
-        } */
+        
     }
 
     void HandleInput()
@@ -108,60 +106,6 @@ public class PlayerMove : MonoBehaviour
     }
 
     
-// need to update the below code
-    // 🚀 *Apply Speed Boost Boon*
-   /* public void ApplySpeedBoost(float duration)
-    {
-        StartCoroutine(SpeedBoostRoutine(duration));
-    }
-
-    private IEnumerator SpeedBoostRoutine(float duration)
-    {
-        moveSpeed += speedBoostAmount;
-        yield return new WaitForSeconds(duration);
-        moveSpeed = baseSpeed;
-    }
-
-    // *Apply Dash Boon*
-    public void ApplyDashBoon(float duration)
-    {
-        StartCoroutine(DashBoonRoutine(duration));
-    }
-
-    private IEnumerator DashBoonRoutine(float duration)
-    {
-        canDash = true;
-        yield return new WaitForSeconds(duration);
-        canDash = false;
-    }
-
-    private IEnumerator DashRoutine()
-    {
-        Vector3 dashDirection = transform.forward;
-        float startTime = Time.time;
-
-        while (Time.time < startTime + dashDuration)
-        {
-            RB.velocity = dashDirection * dashForce;
-            yield return null;
-        }
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("BlurryVisionBane"))
-        {
-            FindAnyObjectByType<BaneManager>().ApplyBlurryVision(10f);
-        }
-        else if (other.CompareTag("FrictionlessBane"))
-        {
-            FindAnyObjectByType<BaneManager>().ApplyFrictionless(10f);
-        }
-        else if (other.CompareTag("SpeedReductionBane"))
-        {
-            FindAnyObjectByType<BaneManager>().ApplySpeedReduction(10f);
-        }
-    }*/
 
 
 
