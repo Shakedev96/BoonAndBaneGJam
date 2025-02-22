@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.EditorTools;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,13 +12,13 @@ public class WallRunADV : MonoBehaviour
     [SerializeField] private float wallRunForce, wallClimbSpeed;
     [SerializeField] private float wallJumpUpForce, wallJumpSideForce;
     [SerializeField] private float maxWallRunTime;
-    private float wallRunTimer;
+    //private float wallRunTimer;
 
 
     [Header ("Input")] 
-    [SerializeField] private KeyCode upwardsRunK = KeyCode.Q;
-    [SerializeField] private KeyCode downwardsRunK = KeyCode.E;
-    [SerializeField] private KeyCode wallJumpK = KeyCode.Space;
+    [SerializeField, Tooltip("R1/RB on GamePad")] private KeyCode upwardsRunK = KeyCode.Q;
+    [SerializeField, Tooltip("L1/LB on GamePad")] private KeyCode downwardsRunK = KeyCode.E;
+    [SerializeField, Tooltip("X/A on GamePad")] private KeyCode wallJumpK = KeyCode.Space;
     [SerializeField] private bool upwardsRunning, downwardsRunning;
     private float horizontalInput;
     private float verticalInput;

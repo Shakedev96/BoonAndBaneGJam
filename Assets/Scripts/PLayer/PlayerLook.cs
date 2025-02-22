@@ -49,36 +49,6 @@ public class PlayerLook : MonoBehaviour
 
     void MyInput()
     {
-        /*
-
-
-        //OLD LOGIC still works
-         mouseX = Input.GetAxisRaw("Mouse X");
-        mouseY = Input.GetAxisRaw("Mouse Y");
-
-        yRot += mouseX * sensX * multiplier;
-        xRot -= mouseY * sensY * multiplier; 
-        if (lookInput == Vector2.zero) return;
-        //NEW LOGIC
-        yRot += lookInput.x * sensX * multiplier;  // Horizontal look
-        xRot -= lookInput.y * sensY * multiplier;  // Vertical look
-
-        xRot = Mathf.Clamp(xRot, -90f, 90f); // Prevent flipping
-
-        Cam.transform.localRotation = Quaternion.Euler(xRot, 0, 0);
-        transform.rotation = Quaternion.Euler(0, yRot, 0);
-
-        */
-
-        // the below code rotates enlessly
-       /*  Vector2 mouseDelta = Mouse.current.delta.ReadValue();
-
-        if (mouseDelta != Vector2.zero)
-        {
-            lookInput = mouseDelta * 0.1f;  // Scale mouse input to match controller input
-            Debug.Log("Mouse Input Detected: " + lookInput);
-        } */
-
         //updated logic
          // Reset input at the start of the frame to prevent continuous rotation
         lookInput = Vector2.zero;
@@ -116,7 +86,10 @@ public class PlayerLook : MonoBehaviour
 
     public void WallRunFOV(float endValue)
     {
-        if (fovCoroutine != null) StopCoroutine(fovCoroutine);
+        if (fovCoroutine != null)
+        { 
+            StopCoroutine(fovCoroutine);
+        }
         fovCoroutine = StartCoroutine(ChangeFOV(endValue));
     }
     private IEnumerator ChangeFOV(float targetFOV)
@@ -158,4 +131,7 @@ public class PlayerLook : MonoBehaviour
     
 
 }
+
+/*
+*/
 

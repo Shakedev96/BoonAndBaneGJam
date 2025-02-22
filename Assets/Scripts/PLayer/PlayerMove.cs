@@ -61,6 +61,15 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
+
+        if(!playerJump.isGrounded && !wallrunning)
+        {
+            baseSpeed = 0;
+        }
+        else
+        {
+            baseSpeed = moveSpeed;
+        }
         HandleInput();
         ControlDrag();
         if(wallrunning)
