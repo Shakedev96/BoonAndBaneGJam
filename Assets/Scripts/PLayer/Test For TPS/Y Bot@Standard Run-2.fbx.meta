@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 00c1a8e28dbd4421d8cfcb089fdea502
+guid: 166d596f54af14651b011b0db8ecc79a
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -31,7 +31,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Wall Run-2
+      name: Standard Run-2
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0

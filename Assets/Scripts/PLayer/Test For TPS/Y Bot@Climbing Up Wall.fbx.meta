@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3225619e322414edf8d457975c3935c4
+guid: 5474477e356774e688b7bbc0d87fd956
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -31,11 +31,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Wall Run
+      name: Climbing Up Wall
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
-      lastFrame: 28
+      lastFrame: 60
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

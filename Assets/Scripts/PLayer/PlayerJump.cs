@@ -61,11 +61,12 @@ public class PlayerJump : MonoBehaviour
     void FixedUpdate()
     {
         rb.AddForce(Physics.gravity * (gravityScale - 1) * rb.mass);
+        CheckGround();
     }
 
     void Update()
     {
-        CheckGround();
+        
     }
 
     private void CheckGround()

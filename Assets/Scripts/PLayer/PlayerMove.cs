@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class PlayerMove : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField] public float moveSpeed;
     [SerializeField] public float movementMultiplier = 10f;
+    [SerializeField] private float refFloat;
     public float rbDrag = 6f;
     public float airDrag = 2f;
 
@@ -18,7 +20,9 @@ public class PlayerMove : MonoBehaviour
     public bool canDash = false;
 
     float horizontalMovement, verticalMovement;
-    Vector2 moveInput;
+   
+    public Vector2 moveInput;
+    
     Vector3 moveDirection;
 
     public bool isFinished;
@@ -70,7 +74,7 @@ public class PlayerMove : MonoBehaviour
         {
             baseSpeed = moveSpeed;
         }
-        HandleInput();
+        //HandleInput();
         ControlDrag();
         if(wallrunning)
         {
@@ -84,12 +88,12 @@ public class PlayerMove : MonoBehaviour
         
     }
 
-    void HandleInput()
+    /* void HandleInput()
     {
         horizontalMovement = moveInput.x;
         verticalMovement = moveInput.y;
         moveDirection = transform.forward * verticalMovement + transform.right * horizontalMovement;
-    }
+    } */
 
     void ControlDrag()
     {
@@ -103,8 +107,31 @@ public class PlayerMove : MonoBehaviour
 
     void HandleMovement()
     {
-        RB.AddForce(moveDirection.normalized * moveSpeed * movementMultiplier, ForceMode.Acceleration);
+        //RB.AddForce(moveDirection.normalized * baseSpeed * movementMultiplier, ForceMode.Acceleration);
+        
+        
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
+        Vector3 _inputkey = new Vector3(horizontalInput , 0 ,verticalInput );
+
+        //playerRB.velocity = _inputkey * walkSpeed;
+
+        RB.MovePosition(transform.position + _inputkey * baseSpeed * Time.deltaTime);
+
+        
+        
+
+        if(_inputkey.magnitude >= 0.1f)
+        {
+            float rotationAngle = Mathf.Atan2(_inputkey.x,  _inputkey.z) * Mathf.Rad2Deg;
+            float smoothRoation = Mathf.SmoothDampAngle(transform.eulerAngles.y , rotationAngle ,ref refFloat , 0.1f);
+
+            transform.rotation = Quaternion.Euler(0 ,smoothRoation ,0);
+        }
+        
+        
     }
+    
 
     void OnCollisionEnter(Collision other)
     {
